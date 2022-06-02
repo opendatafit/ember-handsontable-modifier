@@ -8,6 +8,7 @@ import 'handsontable/dist/handsontable.full.css';
 interface HandsontableModifierArgs {
   Args: {
     Named: {
+      data: Handsontable.RowObject[];
       settings: Handsontable.GridSettings;
     };
     Positional: never;
@@ -56,13 +57,21 @@ export default class HandsontableModifier extends Modifier<HandsontableModifierA
 
     this._hot = new Handsontable(
       element,
-      args.settings
+      {
+        'data': args.data,
+        ...args.settings
+      }
     );
   }
 
   private _updateHot(
     args: NamedArgs<HandsontableModifierArgs>
   ): void {
-    this._hot.updateSettings(args.settings);
+    this._hot.updateSettings(
+      {
+        'data': args.data,
+        ...args.settings
+      }
+    );
   }
 }

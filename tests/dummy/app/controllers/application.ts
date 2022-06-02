@@ -6,12 +6,13 @@ import Handsontable from 'handsontable';
 
 
 export default class Application extends Controller.extend({}) {
+  @tracked data: Handsontable.RowObject[];
   @tracked settings: Handsontable.GridSettings;
 
   constructor() {
     super(...arguments);
 
-    const data = [
+    this.data = [
       ['', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
       ['2017', 10, 11, 12, 13, 15, 16],
       ['2018', 10, 11, 12, 13, 15, 16],
@@ -20,32 +21,37 @@ export default class Application extends Controller.extend({}) {
       ['2021', 10, 11, 12, 13, 15, 16]
     ];
 
-    const settings: Handsontable.GridSettings = {
-      data: data,
+    this.settings = {
       colHeaders: true,
       minSpareRows: 1,
       height: 'auto',
       width: 'auto',
-      columns: [
-        { data: 0 },
-        // skip the second column
-        { data: 2 },
-        { data: 3 },
-        { data: 4 },
-        { data: 5 },
-        { data: 6 }
-      ],
       licenseKey: 'non-commercial-and-evaluation'
     };
 
-    console.log('settings', settings);
-
-    this.settings = settings;
+    console.log('settings', this.settings);
+    console.log('data', this.data);
   }
 
   @action updateData() {
     // Update data here
     console.log('updateData called');
+
+    this.settings = {
+      colHeaders: false,
+      height: 'auto',
+      width: 'auto',
+      minSpareRows: 1,
+      licenseKey: 'non-commercial-and-evaluation'
+    };
+
+    this.data = [
+      { id: 1, name: 'Ted Right', address: '' },
+      { id: 2, name: 'Frank Honest', address: '' },
+      { id: 3, name: 'Joan Well', address: '' },
+      { id: 4, name: 'Gail Polite', address: '' },
+      { id: 5, name: 'Michael Fair', address: '' },
+    ];
   }
 }
 
