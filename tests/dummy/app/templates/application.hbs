@@ -2,4 +2,17 @@
 
 <h2 id="title">Welcome to Ember</h2>
 
+<div
+  {{handsontable
+    settings=this.settings
+  }}
+>
+</div>
+
+<div>
+  <button {{on "click" this.updateData}}>
+    Update data
+  </button>
+</div>
+
 {{outlet}}
