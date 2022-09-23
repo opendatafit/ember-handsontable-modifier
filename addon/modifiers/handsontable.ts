@@ -4,12 +4,14 @@ import { registerDestructor } from '@ember/destroyable';
 import Handsontable from 'handsontable';
 import 'handsontable/dist/handsontable.full.css';
 
+import { next } from '@ember/runloop';
 
 interface HandsontableModifierArgs {
   Args: {
     Named: {
       data: Handsontable.RowObject[];
       settings: Handsontable.GridSettings;
+      visible: boolean;
     };
     Positional: never;
   };
@@ -24,6 +26,7 @@ export default class HandsontableModifier extends Modifier<HandsontableModifierA
     args: ArgsFor<HandsontableModifierArgs>
   ) {
     super(owner, args);
+
     registerDestructor(this, this.destructor);
   }
 
@@ -45,7 +48,14 @@ export default class HandsontableModifier extends Modifier<HandsontableModifierA
     if (!this._hot) {
       this._createHot(element, args);
     } else {
+      // should we do this in the next run loop?
       this._updateHot(args);
+
+      if (this.args.named.visible) {
+        next(() => {
+          this._hot.refreshDimensions();
+        });
+      }
     }
   }
 
