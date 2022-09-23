@@ -15,5 +15,24 @@
     Update data
   </button>
 </div>
+<br>
+<div>
+  <button {{on "click" this.toggleVisibility}}>
+    Toggle table visibility
+  </button>
+</div>
+
+visible: {{this.visibleBool}}
+
+<div aria-hidden="{{if this.visibleBool 'false' 'true'}}">
+  <div 
+    {{handsontable
+      data=this.data
+      settings=this.settings
+      visible=this.visibleBool
+    }}
+  >
+  </div>
+</div>
 
 {{outlet}}
