@@ -10,10 +10,10 @@ interface HandsontableModifierArgs {
   Args: {
     Named: {
       data: Handsontable.RowObject[];
-      settings: Handsontable.GridSettings;
+      config: Handsontable.GridSettings;
       isVisible: boolean;
     };
-    Positional: never;
+    Positional: [];
   };
 }
 
@@ -38,20 +38,20 @@ export default class HandsontableModifier extends Modifier<HandsontableModifierA
 
   modify(
     element: Element,
-    positionalArgs: PositionalArgs<HandsontableModifierArgs>,
-    args: NamedArgs<HandsontableModifierArgs>
+    []: PositionalArgs<HandsontableModifierArgs>,
+    { data, config, isVisible }: NamedArgs<HandsontableModifierArgs>
   ) {
     if (!element) {
       throw new Error('Handsontable has no element');
     }
 
     if (!this._hot) {
-      this._createHot(element, args);
+      this._createHot(element, data, config);
     } else {
       // should we do this in the next run loop?
-      this._updateHot(args);
+      this._updateHot(data, config);
 
-      if (this.args.named.isVisible) {
+      if (isVisible) {
         next(() => {
           this._hot.refreshDimensions();
         });
@@ -61,26 +61,28 @@ export default class HandsontableModifier extends Modifier<HandsontableModifierA
 
   private _createHot(
     element: Element,
-    args: NamedArgs<HandsontableModifierArgs>
+    data: Handsontable.RowObject[],
+    config: Handsontable.GridSettings,
   ): void {
     element.classList.add('handsontable-modifier');
 
     this._hot = new Handsontable(
       element,
       {
-        'data': args.data,
-        ...args.settings
+        'data': data,
+        ...config,
       }
     );
   }
 
   private _updateHot(
-    args: NamedArgs<HandsontableModifierArgs>
+    data: Handsontable.RowObject[],
+    config: Handsontable.GridSettings,
   ): void {
     this._hot.updateSettings(
       {
-        'data': args.data,
-        ...args.settings
+        'data': data,
+        ...config,
       }
     );
   }
