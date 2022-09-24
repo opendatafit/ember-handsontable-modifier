@@ -8,7 +8,7 @@ import Handsontable from 'handsontable';
 export default class Application extends Controller.extend({}) {
   @tracked data: Handsontable.RowObject[];
   @tracked settings: Handsontable.GridSettings;
-  @tracked visibleBool: boolean;
+  @tracked isVisible: boolean;
 
   constructor() {
     super(...arguments);
@@ -30,7 +30,7 @@ export default class Application extends Controller.extend({}) {
       licenseKey: 'non-commercial-and-evaluation'
     };
 
-    this.visibleBool = false;
+    this.isVisible = false;
 
     console.log('settings', this.settings);
     console.log('data', this.data);
@@ -58,7 +58,7 @@ export default class Application extends Controller.extend({}) {
   }
   
   @action toggleVisibility() {
-    this.visibleBool = !this.visibleBool;
+    this.isVisible = !this.isVisible;
     this.data = this.data;
   }
 }

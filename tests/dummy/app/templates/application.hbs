@@ -22,14 +22,14 @@
   </button>
 </div>
 
-visible: {{this.visibleBool}}
+visible: {{this.isVisible}}
 
-<div aria-hidden="{{if this.visibleBool 'false' 'true'}}">
+<div aria-hidden="{{if this.isVisible 'false' 'true'}}">
   <div 
     {{handsontable
       data=this.data
       settings=this.settings
-      visible=this.visibleBool
+      isVisible=this.isVisible
     }}
   >
   </div>
