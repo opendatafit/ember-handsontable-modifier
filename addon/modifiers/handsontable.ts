@@ -11,7 +11,7 @@ interface HandsontableModifierArgs {
     Named: {
       data: Handsontable.RowObject[];
       settings: Handsontable.GridSettings;
-      visible: boolean;
+      isVisible: boolean;
     };
     Positional: never;
   };
@@ -51,7 +51,7 @@ export default class HandsontableModifier extends Modifier<HandsontableModifierA
       // should we do this in the next run loop?
       this._updateHot(args);
 
-      if (this.args.named.visible) {
+      if (this.args.named.isVisible) {
         next(() => {
           this._hot.refreshDimensions();
         });
