@@ -1,4 +1,4 @@
-# ember-handsontable-modifier
+# @opendatafit/ember-handsontable-modifier
 
 [Short description of the addon.]
 
@@ -13,7 +13,7 @@
 ## Installation
 
 ```
-ember install ember-handsontable-modifier
+ember install @opendatafit/ember-handsontable-modifier
 ```
 
 

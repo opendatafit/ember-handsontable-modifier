@@ -1,1 +1,1 @@
-export { default } from 'ember-handsontable-modifier/modifiers/handsontable';
+export { default } from '@opendatafit/ember-handsontable-modifier/modifiers/handsontable';
