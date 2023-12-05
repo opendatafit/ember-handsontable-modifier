@@ -1,4 +1,4 @@
-# @opendatafit/ember-handsontable-modifier
+# ember-handsontable-modifier
 
 [Short description of the addon.]
 
